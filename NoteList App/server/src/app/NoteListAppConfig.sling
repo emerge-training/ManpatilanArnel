@@ -1,0 +1,20 @@
+import jk.env
+import jk.http.server.cors
+
+class:
+
+func getAllowedOrigins as array
+{
+    return [
+        "http://localhost:8080",
+        "http://localhost:8081"
+    ]
+}
+
+func getCorsUtil as HTTPServerCORSUtil
+{
+    var allowed = new vector<string>
+    foreach origin in getAllowedOrigins():
+        allowed += String.asString(origin)
+    return HTTPServerCORSUtil.forWhitelist(allowed)
+}
